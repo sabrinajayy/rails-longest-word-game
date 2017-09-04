@@ -1,0 +1,23 @@
+<h1>LongestWord#game</h1>
+
+<h2>Choose your letters</h2>
+    <form action="/game">
+      <input type="text" id="letters" name="number_of_letters" placeholder="How many letters would you like">
+      <input type="submit" value="Generate">
+    </form>
+
+<h2>Your letters</h2>
+  <%@random_letters.each do |letter| %>
+   <%= "#{letter.upcase}"%>
+  <%end%>
+
+  <h2>Take your best shot!</h2>
+
+  <form action="/score">
+      <input type="text" id="word" name="player_word" placeholder="Enter a word using the letters above">
+      <input type="hidden" id="start_time" name="start_time" value="<%= Time.now %>">
+      <input type="hidden" id="" name="score" value="<%= @score %>">
+      <input type="hidden" id="" name="grid" value="<%= @random_letters %>">
+      <input type="submit" value="Go!">
+  </form>
+
