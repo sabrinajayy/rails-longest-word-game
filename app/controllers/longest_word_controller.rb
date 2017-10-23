@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'json'
+require 'time'
 
 class LongestWordController < ApplicationController
   # def initialize
@@ -13,7 +14,7 @@ class LongestWordController < ApplicationController
   end
 
   def score
-    @start = params[:start_time]
+    @start = Time.parse(params[:start_time]).to_i
     @end = Time.now.to_i
     @word = params[:player_word].to_s
     @grid = params[:grid]
@@ -39,7 +40,11 @@ class LongestWordController < ApplicationController
     time = end_time - start_time
     if parsed_result["found"] == true && in_grid?(attempt, grid)
       score = compute_score(time, attempt)
-      message = "well done"
+      if score == 0
+        message = "You took way to long bro"
+      else
+        message = "well done"
+      end
     elsif parsed_result["found"] == true && in_grid?(attempt, grid) == false
       score = 0
       message = "you used a letter that was not in the grid"
@@ -51,7 +56,8 @@ class LongestWordController < ApplicationController
   end
 
   def compute_score(time, attempt)
-    time > 60.0 ? 0 : attempt.split("").size * (1.0 - time / 60.0)
+    final_score = time > 60.0 ? 0 : attempt.split("").size * (1.0 - time / 60.0)
+    return final_score.round
   end
 
   def in_grid?(word, grid)
