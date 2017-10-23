@@ -24,7 +24,6 @@ class LongestWordController < ApplicationController
   private
 
   def generate_grid(grid_size)
-    # TODO: generate random grid of letters
     random = []
     grid_size.times do
       alphabet = ('a'..'z').to_a
@@ -33,19 +32,45 @@ class LongestWordController < ApplicationController
     random
   end
 
-  def run_game(attempt, grid, start_time, end_time)
-    # TODO: runs the game and return detailed hash of result
+  def english_word?(attempt)
     url = "https://wagon-dictionary.herokuapp.com/#{attempt}"
     parsed_result = JSON.parse(open(url).read)
+    last_letter = attempt.split('').last
+
+    if parsed_result["found"] == true
+      return true
+    elsif last_letter == "s"
+      singularized = attempt.chop
+      new_url = "https://wagon-dictionary.herokuapp.com/#{singularized}"
+      new_result = JSON.parse(open(new_url).read)
+      return true if new_result["found"] == true
+    else
+      return false
+    end
+  end
+
+  def in_grid?(word, grid)
+    grid = grid.downcase.chars
+    word.chars.each do |letter|
+      if !grid.include? letter
+        return false
+      else
+        grid.delete_at(grid.find_index(letter))
+      end
+    end
+    return true
+  end
+
+  def run_game(attempt, grid, start_time, end_time)
     time = end_time - start_time
-    if parsed_result["found"] == true && in_grid?(attempt, grid)
+    if english_word?(attempt) && in_grid?(attempt, grid)
       score = compute_score(time, attempt)
       if score == 0
         message = "You took way to long bro"
       else
         message = "well done"
       end
-    elsif parsed_result["found"] == true && in_grid?(attempt, grid) == false
+    elsif english_word?(attempt) && in_grid?(attempt, grid) == false
       score = 0
       message = "you used a letter that was not in the grid"
     else
@@ -60,17 +85,6 @@ class LongestWordController < ApplicationController
     return final_score.round
   end
 
-  def in_grid?(word, grid)
-    grid = grid.downcase.chars
-    word.chars.each do |letter|
-      if !grid.include? letter
-        return false
-      else
-        grid.delete_at(grid.find_index(letter))
-      end
-    end
-    return true
-  end
 
   def add_to_hash(score, time, message)
     my_hash = {}
