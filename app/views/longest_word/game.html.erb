@@ -11,15 +11,14 @@
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
       <div class="game text-center">
-        <h2>Your letters</h2>
-          <%@random_letters.each do |letter| %>
+          <h2 class="game-letters"><%@random_letters.each do |letter| %>
            <%= "#{letter.upcase}"%>
-          <%end%>
+          <%end%></h2>
 
-          <h2>Take your best shot!</h2>
+          <p>Type the longest word you can find!</p>
 
           <form action="/score">
-              <input type="text" id="word" name="player_word" placeholder="Enter a word using the letters above">
+              <input type="text" id="word" name="player_word">
               <input type="hidden" id="start_time" name="start_time" value="<%= @start_time %>">
               <input type="hidden" id="" name="score" value="<%= @score %>">
               <input type="hidden" id="" name="grid" value="<%= @random_letters.join %>">

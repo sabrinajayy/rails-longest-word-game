@@ -6,7 +6,7 @@ body {
 
 h1 {
   font-family: 'Indie Flower', cursive;
-  font-size: 70px;
+  font-size: 80px;
   color: white;
 }
 
@@ -23,4 +23,70 @@ h1 {
   height: 100px;
   width: auto;
   display: inline;
+}
+
+.game {
+  margin-top: 20px;
+  background-color: white;
+  padding: 40px 20px 50px 20px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 2px 8px -3px rgba(117,117,117,1);
+  -moz-box-shadow: 0px 2px 8px -3px rgba(117,117,117,1);
+  box-shadow: 0px 2px 8px -3px rgba(117,117,117,1);
+}
+
+.game h2 {
+  margin-top: 0px;
+}
+
+.game-letters {
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 5px;
+  padding-top: 20px;
+  margin-bottom: 40px;
+}
+
+.game p {
+  font-size: 16px;
+}
+
+.game input {
+  height: 40px;
+  width: 70%;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #333333;
+  border-radius: 4px;
+
+}
+
+.game input[type=text] {
+  padding: 10px;
+  font-family: 'Droid Serif', serif;
+  font-size: 16px;
+}
+
+.game input:active {
+  border-color: #f45a5a;
+}
+
+.game input[type=submit] {
+  background-color: #7e61a5;
+  color: white;
+  font-family: 'Indie Flower', cursive;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 20px;
+  height: 50px;
+  letter-spacing: 3px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  border-radius: 5px;
+  border-color: transparent;
+}
+
+.game input[type=submit]:hover {
+  background-color: black;
 }
