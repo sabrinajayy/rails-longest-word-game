@@ -8,12 +8,12 @@ class LongestWordController < ApplicationController
 
   def game
     @size = params[:number_of_letters].to_i
-    @random_letters = generate_grid(@size)
-    # @start = Time.now
+    @random_letters = generate_grid(10)
+    @start_time = Time.now
   end
 
   def score
-    @start = params[:start_time].to_i
+    @start = params[:start_time]
     @end = Time.now.to_i
     @word = params[:player_word].to_s
     @grid = params[:grid]
@@ -36,12 +36,11 @@ class LongestWordController < ApplicationController
     # TODO: runs the game and return detailed hash of result
     url = "https://wagon-dictionary.herokuapp.com/#{attempt}"
     parsed_result = JSON.parse(open(url).read)
-    time = (end_time - start_time).to_i
-
+    time = end_time - start_time
     if parsed_result["found"] == true && in_grid?(attempt, grid)
       score = compute_score(time, attempt)
       message = "well done"
-    elsif parsed_result["found"] == true
+    elsif parsed_result["found"] == true && in_grid?(attempt, grid) == false
       score = 0
       message = "you used a letter that was not in the grid"
     else
@@ -56,12 +55,12 @@ class LongestWordController < ApplicationController
   end
 
   def in_grid?(word, grid)
-    grid = grid.join(" ").downcase.chars
+    grid = grid.downcase.chars
     word.chars.each do |letter|
-      if grid.include? letter
-        grid.delete_at(grid.find_index(letter))
-      else
+      if !grid.include? letter
         return false
+      else
+        grid.delete_at(grid.find_index(letter))
       end
     end
     return true

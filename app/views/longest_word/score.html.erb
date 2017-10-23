@@ -1,10 +1,10 @@
 <h1>Score</h1>
 
 <h2>Your Results</h2>
-<p>Your score is <strong><%= @score["score"] %></strong>. <%=message%>.</p>
+<p>Your score is <strong><%= @score[:score] %></strong>. <%=@score[:message].capitalize%>.</p>
 
+<%= link_to 'Play Again', root_url %>
 
-
-<!--<%= @score.each do |key, value| %>
-  <p><%=key.capitalize%> : <%=value%></p>
-<% end %>
+<!--<%#= @score.each do |key, value| %>
+  <p><%#=key.capitalize%> : <%#=value%></p>
+<% #end %>
