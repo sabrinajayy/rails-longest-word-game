@@ -1,17 +1,33 @@
-<h1>LongestWord#game</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+    <div class="main-title text-center">
+      <h1>Scrambld</h1>
+        <%#= image_tag ("https://static.comicvine.com/uploads/square_medium/11/110802/3036954-professor+barabas.png"), :class => "professor-img" %>
+      </div>
+    </div>
+  </div>
 
-<h2>Your letters</h2>
-  <%@random_letters.each do |letter| %>
-   <%= "#{letter.upcase}"%>
-  <%end%>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="game text-center">
+        <h2>Your letters</h2>
+          <%@random_letters.each do |letter| %>
+           <%= "#{letter.upcase}"%>
+          <%end%>
 
-  <h2>Take your best shot!</h2>
+          <h2>Take your best shot!</h2>
 
-  <form action="/score">
-      <input type="text" id="word" name="player_word" placeholder="Enter a word using the letters above">
-      <input type="hidden" id="start_time" name="start_time" value="<%= @start_time %>">
-      <input type="hidden" id="" name="score" value="<%= @score %>">
-      <input type="hidden" id="" name="grid" value="<%= @random_letters.join %>">
-      <input type="submit" value="Go!">
-  </form>
+          <form action="/score">
+              <input type="text" id="word" name="player_word" placeholder="Enter a word using the letters above">
+              <input type="hidden" id="start_time" name="start_time" value="<%= @start_time %>">
+              <input type="hidden" id="" name="score" value="<%= @score %>">
+              <input type="hidden" id="" name="grid" value="<%= @random_letters.join %>">
+              <input type="submit" value="Go!">
+          </form>
+      </div>
 
+    </div>
+  </div>
+
+</div>

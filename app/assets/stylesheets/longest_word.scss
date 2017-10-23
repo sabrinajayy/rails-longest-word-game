@@ -1,3 +1,26 @@
 body {
-  background-color: $red;
+  background-color: #f45a5a;
+  font-family: 'Droid Serif', serif;
+  // color: red;
+}
+
+h1 {
+  font-family: 'Indie Flower', cursive;
+  font-size: 70px;
+  color: white;
+}
+
+.main-title {
+  margin-top: 80px;
+}
+
+.main-title h1 {
+  display: inline-block;
+  margin-bottom: 0px;
+}
+
+.professor-img {
+  height: 100px;
+  width: auto;
+  display: inline;
 }

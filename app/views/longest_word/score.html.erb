@@ -1,13 +1,23 @@
-<h1>Score</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+    <div class="main-title text-center">
+      <h1>Scrambld</h1>
+        <%#= image_tag ("https://static.comicvine.com/uploads/square_medium/11/110802/3036954-professor+barabas.png"), :class => "professor-img" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="game text-center">
+        <h2>Your Word</h2>
+        <p><%= @word %></p>
 
-<h2>Your Word</h2>
-<p><%= @word %></p>
+        <h2>Your Results</h2>
+        <p>Your score is <strong><%= @score[:score] %></strong>. <%=@score[:message]%>.</p>
 
-<h2>Your Results</h2>
-<p>Your score is <strong><%= @score[:score] %></strong>. <%=@score[:message]%>.</p>
-
-<%= link_to 'Play Again', root_url %>
-
-<!--<%#= @score.each do |key, value| %>
-  <p><%#=key.capitalize%> : <%#=value%></p>
-<% #end %>
+        <%= link_to 'Play Again', root_url %>
+      </div>
+    </div>
+  </div>
+</div>
