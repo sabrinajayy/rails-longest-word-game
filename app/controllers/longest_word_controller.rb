@@ -3,9 +3,6 @@ require 'json'
 require 'time'
 
 class LongestWordController < ApplicationController
-  # def initialize
-  #   @start = Time.now
-  # end
 
   def game
     @size = params[:number_of_letters].to_i
@@ -16,7 +13,7 @@ class LongestWordController < ApplicationController
   def score
     @start = Time.parse(params[:start_time]).to_i
     @end = Time.now.to_i
-    @word = params[:player_word].to_s
+    @word = params[:player_word].to_s.gsub!(/[^0-9A-Za-z]/, '')
     @grid = params[:grid]
     @score = run_game(@word, @grid, @start, @end)
   end
@@ -66,16 +63,16 @@ class LongestWordController < ApplicationController
     if english_word?(attempt) && in_grid?(attempt, grid)
       score = compute_score(time, attempt)
       if score == 0
-        message = "You took way to long bro"
+        message = "#{attempt.capitalize} is a word, but you took way to long bro"
       else
-        message = "well done"
+        message = "Great job!"
       end
     elsif english_word?(attempt) && in_grid?(attempt, grid) == false
       score = 0
-      message = "you used a letter that was not in the grid"
+      message = "Cheater! You used a letter that was not in the grid"
     else
       score = 0
-      message = "this is not an english word"
+      message = "#{attempt.capitalize}? Did you make that up? That's not an english word!"
     end
     add_to_hash(score, time, message)
   end

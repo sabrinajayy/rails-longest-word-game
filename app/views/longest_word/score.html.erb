@@ -1,7 +1,10 @@
 <h1>Score</h1>
 
+<h2>Your Word</h2>
+<p><%= @word %></p>
+
 <h2>Your Results</h2>
-<p>Your score is <strong><%= @score[:score] %></strong>. <%=@score[:message].capitalize%>.</p>
+<p>Your score is <strong><%= @score[:score] %></strong>. <%=@score[:message]%>.</p>
 
 <%= link_to 'Play Again', root_url %>
 
