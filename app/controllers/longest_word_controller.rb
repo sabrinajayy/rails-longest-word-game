@@ -78,7 +78,7 @@ class LongestWordController < ApplicationController
   end
 
   def compute_score(time, attempt)
-    final_score = time > 60.0 ? 0 : attempt.split("").size * (1.0 - time / 60.0)
+    final_score = time > 60.0 ? 0 : attempt.split("").size * (1.0 - time / 60.0) * 1000
     return final_score.round
   end
 
